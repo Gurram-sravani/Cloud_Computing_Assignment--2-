@@ -1,0 +1,40 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "2026-09-22T04:55:08Z",
+    "title" : "hr-lookup-api"
+  },
+  "host" : "ec0nt4zxta.execute-api.us-east-1.amazonaws.com",
+  "basePath" : "/prod",
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/" : {
+      "get" : {
+        "responses" : { }
+      }
+    },
+    "/employee/{id}" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : { },
+        "security" : [ {
+          "hr-lookup-cognito-authorizer" : [ ]
+        } ]
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "hr-lookup-cognito-authorizer" : {
+      "type" : "apiKey",
+      "name" : "Authorization",
+      "in" : "header",
+      "x-amazon-apigateway-authtype" : "cognito_user_pools"
+    }
+  },
+  "x-amazon-apigateway-security-policy" : "TLS_1_0"
+}
