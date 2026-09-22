@@ -18,17 +18,17 @@ flowchart TD
     DynamoDB[(DynamoDB Employee Table)]
     Cognito[Cognito User Pool]
 
-    Browser -->|HTTPS GET /| Gateway
-    Gateway -->|GET /| UiLambda
-    UiLambda -->|HTML, CSS, JavaScript| Browser
+    Browser -->|"HTTPS GET /"| Gateway
+    Gateway -->|"GET /"| UiLambda
+    UiLambda -->|"HTML, CSS, JavaScript"| Browser
 
-    Browser -->|GET /employee/{id} + ID Token| Gateway
+    Browser -->|"GET employee by ID with ID token"| Gateway
     Gateway --> Authorizer
-    Authorizer -->|Valid token| Backend
+    Authorizer -->|"Valid token"| Backend
     Backend --> IAM
     IAM --> DynamoDB
 
-    Browser -->|OAuth 2.0 + PKCE| Cognito
+    Browser -->|"OAuth 2.0 + PKCE"| Cognito
 ```
 
 The browser does not access DynamoDB directly. Employee data is retrieved only by the backend Lambda function through its IAM execution role.
